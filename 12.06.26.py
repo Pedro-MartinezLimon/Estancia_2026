@@ -1,5 +1,6 @@
+import matplotlib.pyplot as ploter
+import numpy
 import random
-
 # Ver el LATEX que prepare para entender el codigo y el nombre de algunas variables
 
 exitos = 0
@@ -10,6 +11,9 @@ parametro_p = float(input("Ingrese el valor de P: "))
 # Rangos [0.1,0.2,0.3 ... 1.0]
 rangos = [0,0,0,0,0,0,0,0,0,0]
 
+# Ejes (Graficas)
+eje_x = 0.5 + numpy.arange(9)
+ploter.style.use('_mpl-gallery')
 
 def contador_distribucion(aleatorio):
     if(aleatorio > 0 and aleatorio <= 0.1):
@@ -43,6 +47,16 @@ for iterador in range(100):
 
 # Para ser expresado en porcenaje
 parametro_p *= 100
+
+# plot
+fig, barra = ploter.subplots()
+
+barra.bar(eje_x, rangos, width=1, edgecolor="white", linewidth=0.7)
+
+barra.set(xlim=(0, 10), xticks = numpy.arange(1, 10),
+       ylim=(0, 10), yticks = numpy.arange(1, 10))
+
+ploter.show()
 
 print("Exitos: ", exitos)
 print("Fracasos: ", fracasos)
