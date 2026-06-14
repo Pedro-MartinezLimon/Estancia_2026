@@ -46,3 +46,4 @@ parametro_p *= 100
 
 print("Exitos: ", exitos)
 print("Fracasos: ", fracasos)
+print("Distribución: ", rangos)
