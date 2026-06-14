@@ -3,18 +3,7 @@ import numpy
 import random
 # Ver el LATEX que prepare para entender el codigo y el nombre de algunas variables
 
-exitos = 0
-fracasos = 0
-
-parametro_p = float(input("Ingrese el valor de P: "))
-
-# Rangos [0.1,0.2,0.3 ... 1.0]
-rangos = [0,0,0,0,0,0,0,0,0,0]
-
-# Ejes (Graficas)
-eje_x = 0.5 + numpy.arange(9)
-ploter.style.use('_mpl-gallery')
-
+# Cuenta la distribución de numeros aleatorios
 def contador_distribucion(aleatorio):
     if(aleatorio > 0 and aleatorio <= 0.1):
         rangos[0] += 1
@@ -37,6 +26,18 @@ def contador_distribucion(aleatorio):
     elif(aleatorio > 0.9 and aleatorio <= 1.0):
         rangos[9] += 1
 
+# Variables importantes
+exitos = 0
+fracasos = 0
+
+parametro_p = float(input("Ingrese el valor de P: "))
+
+# Rangos [0.1,0.2,0.3 ... 1.0]
+rangos = [0,0,0,0,0,0,0,0,0,0]
+
+# Ejes (Graficas)
+eje_x = 0.5 + numpy.arange(10)
+ploter.style.use('_mpl-gallery')
 for iterador in range(100):
     aleatorio = random.random()
     if(aleatorio <= parametro_p):
@@ -45,19 +46,16 @@ for iterador in range(100):
         fracasos += 1
     contador_distribucion(aleatorio)
 
-# Para ser expresado en porcenaje
-parametro_p *= 100
-
 # plot
 fig, barra = ploter.subplots()
 
 barra.bar(eje_x, rangos, width=1, edgecolor="white", linewidth=0.7)
 
 barra.set(xlim=(0, 10), xticks = numpy.arange(1, 10),
-       ylim=(0, 10), yticks = numpy.arange(1, 10))
-
-ploter.show()
+       ylim=(0, 20), yticks = numpy.arange(1, 20))
 
 print("Exitos: ", exitos)
 print("Fracasos: ", fracasos)
 print("Distribución: ", rangos)
+
+ploter.show()
