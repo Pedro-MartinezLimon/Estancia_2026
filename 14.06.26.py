@@ -38,7 +38,8 @@ rangos = [0,0,0,0,0,0,0,0,0,0]
 # Ejes (Graficas)
 eje_x = 0.5 + numpy.arange(10)
 ploter.style.use('_mpl-gallery')
-for iterador in range(100):
+
+for iterador in range(10000):
     aleatorio = random.random()
     if(aleatorio <= parametro_p):
         exitos += 1
@@ -49,10 +50,10 @@ for iterador in range(100):
 # plot
 fig, barra = ploter.subplots()
 
-barra.bar(eje_x, rangos, width=1, edgecolor="white", linewidth=0.7)
+barra.bar(eje_x, rangos, width=1, edgecolor="white", linewidth=0.5)
 
 barra.set(xlim=(0, 10), xticks = numpy.arange(1, 10),
-       ylim=(0, 20), yticks = numpy.arange(1, 20))
+       ylim=(0, 1200), yticks = numpy.arange(1, 1200))
 
 print("Exitos: ", exitos)
 print("Fracasos: ", fracasos)
