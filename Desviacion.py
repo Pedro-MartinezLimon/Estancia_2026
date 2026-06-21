@@ -1,53 +1,62 @@
-import matplotlib.pyplot as ploter
-import numpy
 import random
 
-# Contador de frecuencias
-contador_frecuencias = list
-def inicializar_frecuencias():
-    for iterador_j in range(10):
-        contador_frecuencias.append(iterador_j, 0)
-
 # Variables globales
-promedios = list
-def calcular_promedio(num_aleatorios_generados):
-    for iterador_i in range(10):
-        suma += contador_frecuencias[iterador_i]
-    return float(suma/num_aleatorios_generados)
+almacenador_distribucion = []
+def inicializar_alm_dis():
+    for iterador in range(10):
+        almacenador_distribucion[iterador] = 0
 
-variancias = list
-def calcular_variancias(num_aleatorios_generado, promedio_a_comparar):
-    for iterador_i in range(10):
-        suma += (contador_frecuencias[iterador_i] - promedio_a_comparar)
-    return float(suma/num_aleatorios_generado) 
+# Promedios
+almacenador_promedios = []
+def calcular_promedio(phi):
+    for iterador in range(10):
+        suma += abs(almacenador_distribucion[iterador] * (0.1 * (iterador + 1)))
+    return float(suma/(10 ** (phi + 1)))
 
-# Clasifica las frecuencias
-def triage_de_frec(aleatorio):
-    for iterador_k in range(10):
-        if(aleatorio > (0.1 * iterador_k) and aleatorio <= (0.1 (iterador_k + 1))):
-            contador_frecuencias[iterador_k] += 1
+# Varianza
+almacenador_varianza = []
+def calcular_varianza(phi, promedio_base):
+    for iterador in range(10):
+        suma += abs((almacenador_distribucion[iterador] * (0.1 * (iterador + 1))) - promedio_base)
+    return float(suma/(10 ** (phi + 1)))
+
+# Triage aleatorios
+def triage_aleatorios(aleatorio):
+    if(aleatorio > 0 and aleatorio <= 0.1):
+        almacenador_distribucion[0] += 1
+    elif(aleatorio > 0.1 and aleatorio <= 0.2):
+        almacenador_distribucion[1] += 1
+    elif(aleatorio > 0.2 and aleatorio <= 0.3):
+        almacenador_distribucion[2] += 1
+    elif(aleatorio > 0.3 and aleatorio <= 0.4):
+        almacenador_distribucion[3] += 1
+    elif(aleatorio > 0.4 and aleatorio <= 0.5):
+        almacenador_distribucion[4] += 1
+    elif(aleatorio > 0.5 and aleatorio <= 0.6):
+        almacenador_distribucion[5] += 1
+    elif(aleatorio > 0.6 and aleatorio <= 0.7):
+        almacenador_distribucion[6] += 1
+    elif(aleatorio > 0.7 and aleatorio <= 0.8):
+        almacenador_distribucion[7] += 1
+    elif(aleatorio > 0.8 and aleatorio <= 0.9):
+        almacenador_distribucion[8] += 1
+    elif(aleatorio > 0.9 and aleatorio <= 1.0):
+        almacenador_distribucion[9] += 1
 
 
 if __name__ == '__main__':
-    inicializar_frecuencias()
+    for iterador in range(10):
+        almacenador_distribucion.append(0)
 
     for iterador_i in range(5):
-        for iterador_k in range(10 * (iterador_i + 1)):
-            triage_de_frec(random.random())
+        for iterador_k in range(10 ** (iterador_i + 1)):
+            aleatorio = random.random()
+            triage_aleatorios(aleatorio)
 
-        promedios.append(iterador_i, calcular_promedio(10 * (iterador_i + 1))) 
-        variancias.append(iterador_i, calcular_variancias(10 * (iterador_i + 1), promedios[iterador_i]))
-        inicializar_frecuencias()
-# ====================================== Generacion del plot ===================================================
-    eje_x = 0.5 + numpy.arange(5)
-    ploter.style.use('_mpl-gallery')
-
-    fig, barra = ploter.subplots()
-
-    barra.bar(eje_x, variancias, width = 1, edgecolor="white", linewidth=0.5)
-
-    barra.set(xlim=(0, 5), xticks = numpy.arange(1, 10),
-    ylim=(0, 5), yticks = numpy.arange(1, 5))
-
-
-    ploter.show()
+        almacenador_promedios.append(float(calcular_promedio(iterador_i)))
+        almacenador_varianza.append(float(calcular_varianza(iterador_i, almacenador_promedios[iterador_i])))
+    
+    inicializar_alm_dis()
+    print(almacenador_distribucion)
+    print(almacenador_promedios)
+    print(almacenador_varianza)
