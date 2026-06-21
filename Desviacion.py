@@ -9,6 +9,8 @@ def inicializar_alm_dis():
 # Promedios
 almacenador_promedios = []
 def calcular_promedio(phi):
+    suma = 0
+
     for iterador in range(10):
         suma += abs(almacenador_distribucion[iterador] * (0.1 * (iterador + 1)))
     return float(suma/(10 ** (phi + 1)))
@@ -16,6 +18,8 @@ def calcular_promedio(phi):
 # Varianza
 almacenador_varianza = []
 def calcular_varianza(phi, promedio_base):
+    suma = 0
+
     for iterador in range(10):
         suma += abs((almacenador_distribucion[iterador] * (0.1 * (iterador + 1))) - promedio_base)
     return float(suma/(10 ** (phi + 1)))
@@ -53,10 +57,15 @@ if __name__ == '__main__':
             aleatorio = random.random()
             triage_aleatorios(aleatorio)
 
+        print("Distribucion con ", 10 ** (iterador_i + 1))
+        print(almacenador_distribucion)
+        
         almacenador_promedios.append(float(calcular_promedio(iterador_i)))
         almacenador_varianza.append(float(calcular_varianza(iterador_i, almacenador_promedios[iterador_i])))
     
     inicializar_alm_dis()
-    print(almacenador_distribucion)
+    
+    print("\n==================================Resultados=============================\n")
+
     print(almacenador_promedios)
     print(almacenador_varianza)
