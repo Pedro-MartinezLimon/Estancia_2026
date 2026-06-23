@@ -28,15 +28,15 @@ def Degradar():
 
 #==================== main ===============
 if __name__ == '__main__':
-    p_sintesis = int(input("P de sintesis (1-100%): "))
-    p_degradacion = int(input("P de Degradacion (1-100%): "))
+    p_sintesis = float(input("P de sintesis (1-100%): "))
+    p_degradacion = float(input("P de Degradacion (1-100%): "))
     
-    mol_nuevas = int(input("Moleculas producidas: "))
-    mol_degrad = int(input("Moleculas degradadas: "))
+    mol_nuevas = float(input("Moleculas producidas: "))
+    mol_degrad = float(input("Moleculas degradadas: "))
     
-    parametro_phi = -1 * int(input("Parametro phi (1 - 5): "))
+    parametro_phi = -1 * float(input("Parametro phi (1 - 10): "))
 
-    for iterador in range(10 ** (-1 * parametro_phi)):
+    for iterador in range(10 ** int(abs(parametro_phi))):
         if(Generar()):
             total_moleculas += mol_nuevas
 
@@ -50,6 +50,6 @@ if __name__ == '__main__':
             
             momentos_cambio.append(iterador)
             moleculas_cambio.append(total_moleculas)
-    print("========= Resultados (momento|moleculas totales)=============")
+    print("========= Resultados (momento (dt)|moleculas totales)=============")
     print(momentos_cambio)
     print(moleculas_cambio)
