@@ -27,6 +27,13 @@ def Degradar():
         return True
     else:
         return False
+def Config_lista():
+    for iterador in range(10 ** int(abs(parametro_phi))):
+        moleculas_cambio.append(0)
+def Arreglar_distro():
+    for iterador in range(10 ** int(abs(parametro_phi))):
+        if(moleculas_cambio[iterador] == 0 and moleculas_cambio[iterador - 1] != moleculas_cambio[iterador]):
+            moleculas_cambio[iterador] = moleculas_cambio[iterador - 1]
 
 #==================== main ===============
 if __name__ == '__main__':
@@ -38,6 +45,8 @@ if __name__ == '__main__':
     mol_degrad = float(input("Moleculas degradadas: "))
     
     parametro_phi = -1 * float(input("Parametro phi (1 - 10): "))
+
+    Config_lista()
 
     for iterador in range(10 ** int(abs(parametro_phi))):
         if(Generar()):
@@ -57,20 +66,21 @@ if __name__ == '__main__':
             moleculas_cambio.append(total_moleculas)
 
             print("Degradada")
-    print("========= Resultados (momento (dt)|moleculas totales)=============")
+    print("========= Resultados (momentos (dt))=============")
     print(momentos_cambio)
-    print(moleculas_cambio)
 
     if(len(moleculas_cambio) == 0):
         moleculas_cambio.append(0)
+
+    Arreglar_distro()
 
     plt.style.use('_mpl-gallery')
 
     fit, ax = plt.subplots()
 
-    ax.stairs(moleculas_cambio, linewidth=1.5)
+    ax.stairs(moleculas_cambio, linewidth=0.8)
     
     ax.set(xlim=(0, (10 ** (abs(parametro_phi)))), xticks = np.arange(0, 10 ** (abs(parametro_phi))),
-           ylim=(0, 20), yticks = np.arange(1, 20))
+           ylim=(0, 50), yticks = np.arange(1, 50))
     
-    plt.show
+    plt.show()
