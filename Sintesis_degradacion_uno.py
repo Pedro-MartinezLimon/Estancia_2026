@@ -1,3 +1,5 @@
+import matplotlib.pyplot as plt
+import numpy as np
 import random
 
 # Variables globales
@@ -28,6 +30,7 @@ def Degradar():
 
 #==================== main ===============
 if __name__ == '__main__':
+    
     p_sintesis = float(input("P de sintesis (1-100%): "))
     p_degradacion = float(input("P de Degradacion (1-100%): "))
     
@@ -42,6 +45,8 @@ if __name__ == '__main__':
 
             momentos_cambio.append(iterador)
             moleculas_cambio.append(total_moleculas)
+
+            print("Generada")
         elif(total_moleculas > 0 and Degradar()):
             total_moleculas -= mol_degrad
 
@@ -50,6 +55,22 @@ if __name__ == '__main__':
             
             momentos_cambio.append(iterador)
             moleculas_cambio.append(total_moleculas)
+
+            print("Degradada")
     print("========= Resultados (momento (dt)|moleculas totales)=============")
     print(momentos_cambio)
     print(moleculas_cambio)
+
+    if(len(moleculas_cambio) == 0):
+        moleculas_cambio.append(0)
+
+    plt.style.use('_mpl-gallery')
+
+    fit, ax = plt.subplots()
+
+    ax.stairs(moleculas_cambio, linewidth=1.5)
+    
+    ax.set(xlim=(0, (10 ** (abs(parametro_phi)))), xticks = np.arange(0, 10 ** (abs(parametro_phi))),
+           ylim=(0, 20), yticks = np.arange(1, 20))
+    
+    plt.show
