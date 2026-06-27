@@ -47,16 +47,15 @@ if __name__ == '__main__':
     parametro_phi = -1 * float(input("Parametro phi (1 - 10): "))
 
     Config_lista()
-
+# in range(N) ; N = T/dt
     for iterador in range(10 ** int(abs(parametro_phi))):
         if(Generar()):
             total_moleculas += mol_nuevas
 
             momentos_cambio.append(iterador)
             moleculas_cambio.append(total_moleculas)
-
-            print("Generada")
-        elif(total_moleculas > 0 and Degradar()):
+        
+        if(total_moleculas > 0 and Degradar()):
             total_moleculas -= mol_degrad
 
             if(total_moleculas < 0):
@@ -83,4 +82,15 @@ if __name__ == '__main__':
     ax.set(xlim=(0, (10 ** (abs(parametro_phi)))), xticks = np.arange(0, 10 ** (abs(parametro_phi))),
            ylim=(0, 50), yticks = np.arange(1, 50))
     
+    plt.show()
+
+    #================
+    plt.style.use('_mpl-gallery')
+
+    fit, ax = plt.subplots()
+
+    ax.stairs(time_proteins, linewidth=0.8)
+    
+    ax.set(xlim=(0, 10 ** (A_parameter + B_parameter)), xticks = np.arange(0, 10 ** (A_parameter + B_parameter)),
+           ylim=(0, 50), yticks = np.arange(1, 50))
     plt.show()
