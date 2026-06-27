@@ -33,6 +33,7 @@ if __name__ == '__main__':
     #  = 10 ** (A)/ 10 ** (-B) 
     #  = 10 ** (A + B)
 
+    
     for i in range(10 ** (A_parameter + B_parameter)):
         if(Birth(birth_rate, B_parameter)):
             
@@ -49,5 +50,12 @@ if __name__ == '__main__':
             total_proteins -= death_count
             time_proteins.append(total_proteins)
 
-    print("========= Results (momentos (dt)) =============")
-    print(time_proteins)
+    plt.style.use('_mpl-gallery')
+
+    fit, ax = plt.subplots()
+
+    ax.stairs(time_proteins, linewidth=1.5)
+    
+    ax.set(xlim=(0, 10 ** (A_parameter + B_parameter)), xticks = np.arange(0, 10 ** (A_parameter + B_parameter)),
+           ylim=(0, 30), yticks = np.arange(1, 30))
+    plt.show()
