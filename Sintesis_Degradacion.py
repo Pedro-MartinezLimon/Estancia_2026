@@ -25,9 +25,10 @@ if __name__ == '__main__':
     death_rate = int(input("Death rate: "))
 
     # Exponent for delta t
+    Time = int(input("Time: "))
     B_parameter = int(input("B (1-3): "))
     
-    for i in range(10 ** (B_parameter)):
+    for i in range(Time * 10 ** (B_parameter)):
         if(Birth(birth_rate, B_parameter)):
             
             total_proteins += 1
