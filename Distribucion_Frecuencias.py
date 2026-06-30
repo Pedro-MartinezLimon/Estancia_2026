@@ -28,9 +28,10 @@ if __name__ == '__main__':
     death_rate = int(input("Death rate: "))
 
     # Exponent of delta t
+    Time = int(input("Time: "))
     B_parameter = int(input("B (1-3): "))
 
-    for i in range(10 ** B_parameter):
+    for i in range(Time * 10 ** B_parameter):
         if(Birth(birth_rate, B_parameter)):
             total_proteins += 1
 
@@ -40,27 +41,26 @@ if __name__ == '__main__':
             for j in range(total_proteins):
                 if(Death(death_rate, B_parameter)):
                     death_count += 1
+
             total_proteins -= death_count
         
         frecuencies[total_proteins] += 1
 
     print(frecuencies)
-    for i in range(len(frecuencies)):
-        frecuencies[i] *= 10 ** -1
-    print(frecuencies)
-
-
     plt.style.use('_mpl-gallery')
+
+    for i in range(20):
+        frecuencies[i] *= 10 ** -2
 
     # make data:
     x_axis = np.arange(len(frecuencies))
 
     # plot
     fig, ax = plt.subplots()
-
+    
     ax.bar(x_axis, frecuencies, width=1, edgecolor="white", linewidth=0.7)
 
     ax.set(xlim=(0, 20), xticks=np.arange(1, 20),
-       ylim=(0, 10), yticks=np.arange(1, 10))
+       ylim=(0, 100), yticks=np.arange(1, 100))
 
     plt.show()
